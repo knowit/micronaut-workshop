@@ -1,0 +1,12 @@
+micronaut:
+  application:
+    name: micronaut-workshop-baseline
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+endpoints:
+  info:
+    sensitive: false
