@@ -1,28 +1,27 @@
 package no.knowit.chapter.jvm.micronaut.system
 
+import io.micronaut.context.annotation.Context
+import io.micronaut.context.annotation.Requires
 import io.micronaut.context.env.Environment
-import io.micronaut.context.event.ApplicationEventListener
-import io.micronaut.context.event.StartupEvent
+import io.micronaut.core.util.StringUtils
 import io.micronaut.core.version.VersionUtils.MICRONAUT_VERSION
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import jakarta.inject.Singleton
+import jakarta.annotation.PostConstruct
 import java.util.regex.Pattern
 import java.util.regex.Pattern.CASE_INSENSITIVE
 import java.util.regex.Pattern.compile
 
-@Singleton
-class ApplicationStartupLogger(private val environment: Environment) : ApplicationEventListener<StartupEvent> {
+@Context
+@Requires(property = "micronaut.startup.logger.enabled", defaultValue = StringUtils.TRUE, value = StringUtils.TRUE)
+class ApplicationStartupLogger(private val environment: Environment) {
     companion object {
         val log: Logger = LoggerFactory.getLogger(ApplicationStartupLogger::class.java)
         private val PROPERTY_NAMES_TO_MASK = arrayOf("password", "credential", "certificate", "key", "secret", "token")
         private val MASKING_PATTERNS: List<Pattern> = PROPERTY_NAMES_TO_MASK.map { s -> compile(".*$s.*", CASE_INSENSITIVE) }
     }
 
-    override fun onApplicationEvent(event: StartupEvent) {
-        logConfig()
-    }
-
+    @PostConstruct
     fun logConfig() {
         log.info("----- Start Application Configuration -----")
         printMicronautVersion()
