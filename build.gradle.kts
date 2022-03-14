@@ -76,8 +76,4 @@ tasks {
             javaParameters = true
         }
     }
-
-    dockerfileNative {
-        baseImage("gcr.io/distroless/cc-debian11") // Tag latest: default root user; Tag debug: available shell; Tag nonroot: non-root user
-    }
 }
