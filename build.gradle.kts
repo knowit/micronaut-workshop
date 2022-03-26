@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm")
     kotlin("kapt")
     kotlin("plugin.allopen")
-    id("io.micronaut.application") version "3.2.2"
+    id("io.micronaut.application") version "3.3.1"
 }
 
 group = "no.knowit.chapter.jvm.micronaut"
