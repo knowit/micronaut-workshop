@@ -10,3 +10,7 @@ netty:
 endpoints:
   info:
     sensitive: false
+  health:
+    details-visible: anonymous
+    disk-space:
+      enabled: false
