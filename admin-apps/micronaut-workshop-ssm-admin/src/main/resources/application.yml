@@ -1,0 +1,16 @@
+micronaut:
+  application:
+    name: workshop-ssm-admin
+  server:
+    port: 9000
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+endpoints:
+  health:
+    details-visible: anonymous
+    disk-space:
+      enabled: false
